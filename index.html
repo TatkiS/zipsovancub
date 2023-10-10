@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Радіо - Зіпсована Хвиля</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      color: white;
+      padding: 10px;
+    }
+
+    .title {
+      font-size: 2em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .player, #alternative-player {
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .facebook-button, .switch-button {
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .title {
+        font-size: 1.5em;
+      }
+
+      .content {
+        padding: 5px;
+      }
+
+      .facebook-button, .switch-button {
+        font-size: 0.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video background -->
+  <video id="video-background" autoplay muted loop>
+    <source src="your-video-file.mp4" type="video/mp4">
+  </video>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Animated Title -->
+    <div class="title">Радіо - Зіпсована Хвиля</div>
+
+    <!-- Default Player -->
+    <audio id="default-player" class="player" controls>
+      <source src="http://15404.cloudrad.io:9020/live" type="audio/mpeg">
+    </audio>
+
+    <!-- Alternative Player -->
+    <iframe id="alternative-player" class="player" style="display:none" src="https://cdn2.cloudrad.io/RadioZipsuvanaHvilya/live/p1-popup.html"></iframe>
+
+    <!-- Switch Player Button -->
+    <button class="switch-button" onclick="switchPlayer()">Переключити плеєр</button>
+
+    <!-- Facebook button -->
+    <a href="https://www.facebook.com/groups/czinfo360" target="_blank">
+      <button class="facebook-button">Приєднатися до нас на Facebook</button>
+    </a>
+
+    <!-- Widgets -->
+    <div id="stream_info">
+      <p>Поточна пісня: <span id="stream_info_song">Завантаження...</span></p>
+      <p>Назва потоку: <span id="stream_info_title">Завантаження...</span></p>
+      <p>Бітрейт: <span id="stream_info_bitrate">Завантаження...</span></p>
+      <p>Поточні слухачі: <span id="stream_info_listeners">Завантаження...</span></p>
+      <p>Максимальна кількість слухачів: <span id="stream_info_maxlisteners">Завантаження...</span></p>
+      <p>Статус джерела: <span id="stream_info_source">Завантаження...</span></p>
+      <p>Останні треки: <span id="stream_info_songhistory">Завантаження...</span></p>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script language="javascript" type="text/javascript" src="https://cdn2.cloudrad.io/RadioZipsuvanaHvilya/live/streaminfo.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(switchPlayer, 1000); // затримка в 1000 мс
+    });
+
+    function switchPlayer() {
+      const defaultPlayer = document.getElementById('default-player');
+      const alternativePlayer = document.getElementById('alternative-player');
+      
+      if (defaultPlayer.style.display !== 'none') {
+        defaultPlayer.style.display = 'none';
+        alternativePlayer.style.display = 'block';
+      } else {
+        defaultPlayer.style.display = 'block';
+        alternativePlayer.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
